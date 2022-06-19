@@ -32,6 +32,10 @@ public class Alumno {
     public Alumno() {
     }
 
+    public Alumno(int leg, String nombre, String apellido) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getIdAlumno() {
         return idAlumno;
     }
@@ -108,6 +112,10 @@ public class Alumno {
             return false;
         }
         return true;
+    }
+
+    public void agregarMateria(Materia materiaSeleccionada) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
