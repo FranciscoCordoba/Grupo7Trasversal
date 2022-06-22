@@ -117,4 +117,30 @@ public class MateriaData {
         
     }
     
+    public boolean modificarMateria(Materia materia){
+    
+	String sql = "UPDATE materia SET nombre = ?, anio = ?, activo = ? WHERE nombre = ?";
+	boolean modificar = false;
+	
+	try {
+	    PreparedStatement ps = con.prepareStatement(sql);
+	    ps.setString(1, materia.getNombre());
+	    ps.setInt(2, materia.getAnio());
+	    ps.setBoolean(3, materia.isActivo());
+	    ps.setString(4, materia.getNombre());
+	    
+	    if(ps.executeUpdate() != 0){
+		modificar = true;
+	    }
+	    
+	    ps.close();
+	    
+	} catch (SQLException ex) {
+	    JOptionPane.showMessageDialog(null, ex);
+	}
+	
+	return modificar;
+	
+    }
+    
 }

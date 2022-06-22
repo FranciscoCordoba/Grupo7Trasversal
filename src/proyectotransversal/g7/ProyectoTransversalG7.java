@@ -44,7 +44,9 @@ public class ProyectoTransversalG7 {
         
         
         // Borrar materia por ID
-       md.borrarMateria(3);
+       //md.borrarMateria(9);
+       
+       md.modificarMateria(miMateria);
 	
     }
     
