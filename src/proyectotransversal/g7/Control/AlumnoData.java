@@ -29,9 +29,9 @@ public class AlumnoData {
 
 	boolean insert = true;
 	String sql = "INSERT INTO alumno (nombre, apellido, fechNac, dni, activo)  VALUES (?, ?, ?, ?, ?)";
-	
+
 	try {
-	
+
 	    PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 	    ps.setString(1, alumno.getNombre());
@@ -62,17 +62,17 @@ public class AlumnoData {
 	    }
 
 	}
-	
+
 	return insert;
 
     }
 
     public List<Alumno> obtenerAlumnos() {
-	
+
 	ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
 
 	try {
-	    
+
 	    String sql = "SELECT * FROM alumno WHERE activo = 1;";
 	    PreparedStatement ps = con.prepareStatement(sql);
 
@@ -89,15 +89,15 @@ public class AlumnoData {
 
 		alumnos.add(alumno);
 	    }
-	    
+
 	    ps.close();
-	    
+
 	} catch (SQLException ex) {
 	    JOptionPane.showMessageDialog(null, "Error al obtener alumnos");
 	}
 
 	return alumnos;
-	
+
     }
 
     public Alumno obtenerAlumnoXId(int id) {
@@ -191,10 +191,11 @@ public class AlumnoData {
 	    ps.setInt(6, alumno.getIdAlumno());
 
 	    if (ps.executeUpdate() != 0) {
-
 		modificado = true;
 	    }
+
 	    ps.close();
+
 	} catch (SQLException ex) {
 	    JOptionPane.showMessageDialog(null, "Error de sintaxis ");
 	}
