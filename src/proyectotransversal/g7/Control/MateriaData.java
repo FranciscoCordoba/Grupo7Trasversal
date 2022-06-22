@@ -94,5 +94,27 @@ public class MateriaData {
 	return materias;
 	
     }
+    
+    public boolean borrarMateria(int id){
+        
+        boolean matBorrada = false;
+        String sql = "UPDATE materia SET activo = 0 WHERE idMateria = ?";
+        try {
+	    PreparedStatement ps = con.prepareStatement(sql);
+	    ps.setInt(1, id);
 
+	    if (ps.executeUpdate() != 0) {
+
+		matBorrada = true;
+	    }
+	    ps.close();
+            
+            } catch (SQLException ex) {
+	    JOptionPane.showMessageDialog(null, "Error de sintaxis ");
+	}
+
+	return matBorrada;
+        
+    }
+    
 }

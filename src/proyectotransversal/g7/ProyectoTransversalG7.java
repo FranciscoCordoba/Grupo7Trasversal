@@ -32,15 +32,19 @@ public class ProyectoTransversalG7 {
 	
 	MateriaData md = new MateriaData(con);
 	
-	md.agregarMateria(miMateria);
+	//md.agregarMateria(miMateria);
 	
 	AlumnoData ad = new AlumnoData(con);
 	
 	ad.agregarAlumno(miAlumno);
 	
-	System.out.println(ad.obtenerAlumnos());
+	//System.out.println(ad.obtenerAlumnos());
 	
-	System.out.println(md.obtenerMaterias());
+	//System.out.println(md.obtenerMaterias());
+        
+        
+        // Borrar materia por ID
+       md.borrarMateria(3);
 	
     }
     
