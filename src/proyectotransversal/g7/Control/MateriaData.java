@@ -143,4 +143,72 @@ public class MateriaData {
 	
     }
     
+    public Materia obtenerMateriaPorID(int id){
+
+        Materia materia = null;
+
+        try {
+
+        String sql = "SELECT * FROM materia WHERE idMateria = ? AND activo = 1;";
+
+        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+        ps.setInt(1, id);
+	
+	ResultSet resultSet = ps.executeQuery();
+
+        while(resultSet.next()){
+	
+	materia = new Materia();
+        materia.setNombre(resultSet.getString("nombre"));
+        materia.setAnio(resultSet.getInt("anio"));
+        materia.setIdMateria(resultSet.getInt("idMateria"));
+        materia.setActivo(resultSet.getBoolean("activo"));
+
+        }
+
+        ps.close();
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener la materia");
+    }
+
+    return materia;
+
+    }
+
+    public Materia obtenerMateriaPorNombre(String nombre){
+
+        Materia materia = null;
+
+        try {
+
+        String sql = "SELECT * FROM materia WHERE nombre = ? AND activo = 1;";
+
+        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+        ps.setString(1, nombre);
+        
+	ResultSet resultSet = ps.executeQuery();
+
+        while(resultSet.next()){
+
+	materia = new Materia();
+        materia.setNombre(resultSet.getString("nombre"));
+        materia.setAnio(resultSet.getInt("anio"));
+        materia.setIdMateria(resultSet.getInt("idMateria"));
+        materia.setActivo(resultSet.getBoolean("activo"));
+
+        }
+
+        ps.close();
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al obtener la materia");
+    }
+
+    return materia;
+
+    }
+    
 }

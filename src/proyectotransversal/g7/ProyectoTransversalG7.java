@@ -44,10 +44,17 @@ public class ProyectoTransversalG7 {
         
         
         // Borrar materia por ID
-       //md.borrarMateria(9);
+       md.borrarMateria(9);
        
-       md.modificarMateria(miMateria);
-	
+       //md.modificarMateria(miMateria);
+       
+       //System.out.println(ad.obtenerAlumnoXId(4));
+       
+//       ad.borrarAlumno(4);
+       System.out.println(ad.obtenerAlumnoXId(50));
+       System.out.println(md.obtenerMateriaPorID(9));
+       System.out.println(md.obtenerMateriaPorNombre("Web 1"));
+
     }
     
 }
