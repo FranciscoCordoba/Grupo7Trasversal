@@ -20,7 +20,7 @@ public class ProyectoTransversalG7 {
 	
 	LocalDate date = LocalDate.of(2000, 11, 15);
 
-	Alumno miAlumno = new Alumno(9, "Nicanor", "Suares", date , 42991424, true);
+	Alumno miAlumno = new Alumno(4, "Nicanor", "Suares", date , 42991424, true);
 	System.out.println(miAlumno.toString());
 	
 	Materia miMateria = new Materia(9, "Programación 5", 3, true);
@@ -30,20 +30,16 @@ public class ProyectoTransversalG7 {
 	
 	MateriaData md = new MateriaData(con);
 	
-	
 	AlumnoData ad = new AlumnoData(con);
-	
        
-       Alumno test = ad.obtenerAlumnoXId(4);
+        InscripcionData id = new InscripcionData(con);
        
-       Inscripcion ins = new Inscripcion(miMateria, test, 10);
+        //id.guardarInscripcion(ins);
        
-       InscripcionData id = new InscripcionData(con);
-       
-       //id.guardarInscripcion(ins);
-       
-       System.out.println(id.obtenerInscripciones());
+        System.out.println(id.obtenerInscripciones());
 
+        id.actualizarNota(miAlumno, miMateria, 9);
+    
     }
     
 }

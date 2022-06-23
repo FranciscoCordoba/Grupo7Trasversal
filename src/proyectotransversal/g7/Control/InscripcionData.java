@@ -94,5 +94,33 @@ public class InscripcionData {
         return inscripciones;
     }
 
+    public boolean actualizarNota(Alumno alu,Materia mat, double nota){
+    boolean insc=false;
+        try {
+            String sql = "update inscripcion SET nota = ? WHERE idAlumno = ? and idMateria = ?";
+
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setDouble(1, nota);
+            ps.setInt(2, alu.getIdAlumno());
+            ps.setDouble(3, mat.getIdMateria());
+
+            if (ps.executeUpdate() != 0) {
+		insc = true;
+	    }
+            
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al cambiar materia" + ex.getMessage());
+        }
+        return insc;
+    
+    
+   
+
+    
+    
+    }
+
     
 }
