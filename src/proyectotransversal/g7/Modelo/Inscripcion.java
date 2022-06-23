@@ -2,35 +2,35 @@
 package proyectotransversal.g7.Modelo;
 
 
-public class Cursada {
+public class Inscripcion {
     
-    private int id;
+    private int idAlumno;
     private Materia materia;
     private Alumno alumno;
     private double nota;
 
-    public Cursada(int id, Materia materia, Alumno alumno, double nota) {
-        this.id = id;
+    public Inscripcion(int id, Materia materia, Alumno alumno, double nota) {
+        this.idAlumno = id;
         this.materia = materia;
         this.alumno = alumno;
         this.nota = nota;
     }
 
-    public Cursada(Materia materia, Alumno alumno, double nota) {
+    public Inscripcion(Materia materia, Alumno alumno, double nota) {
         this.materia = materia;
         this.alumno = alumno;
         this.nota = nota;
     }
 
-    public Cursada() {
+    public Inscripcion() {
     }
 
     public int getId() {
-        return id;
+        return idAlumno;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.idAlumno = id;
     }
 
     public Materia getMateria() {
@@ -60,7 +60,7 @@ public class Cursada {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + this.id;
+        hash = 67 * hash + this.idAlumno;
         return hash;
     }
 
@@ -75,8 +75,8 @@ public class Cursada {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Cursada other = (Cursada) obj;
-        if (this.id != other.id) {
+        final Inscripcion other = (Inscripcion) obj;
+        if (this.idAlumno != other.idAlumno) {
             return false;
         }
         return true;
@@ -84,7 +84,7 @@ public class Cursada {
 
     @Override
     public String toString() {
-        return "Cursada{" + "id=" + id + ", materia=" + materia + ", alumno=" + alumno + ", nota=" + nota + '}';
+        return "Cursada{" + "id=" + idAlumno + ", materia=" + materia + ", alumno=" + alumno + ", nota=" + nota + '}';
     }
     
     
