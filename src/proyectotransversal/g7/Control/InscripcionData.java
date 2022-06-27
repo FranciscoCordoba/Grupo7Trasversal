@@ -114,13 +114,34 @@ public class InscripcionData {
             JOptionPane.showMessageDialog(null, "Error al cambiar materia" + ex.getMessage());
         }
         return insc;
-    
-    
-   
-
-    
-    
     }
+    
+    public List<Alumno> alumnosDeXMateria(Materia mat) {
+        ArrayList<Alumno> alumnos = new ArrayList();
+        try {
+            String sql = "SELECT idAlumno FROM inscripcion WHERE idMateria = ?;";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, mat.getIdMateria());
+            
+            ResultSet resultSet = ps.executeQuery();
+            Alumno alumno;
+            while (resultSet.next()) {
+                if(mat.isActivo()){
+                    alumno = new Alumno();
 
+                    alumno = alumData.obtenerAlumnoXId(resultSet.getInt("idAlumno"));
+
+                    alumnos.add(alumno);
+                }
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener los alumnos de la materia: " + ex.getMessage());
+        }
+
+        return alumnos;
+    }
     
 }

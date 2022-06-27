@@ -36,10 +36,13 @@ public class ProyectoTransversalG7 {
        
         //id.guardarInscripcion(ins);
        
-        System.out.println(id.obtenerInscripciones());
+        //System.out.println(id.obtenerInscripciones());
 
         id.actualizarNota(miAlumno, miMateria, 9);
-    
+        md.borrarMateria(9);
+        ad.modificarAlumno(miAlumno);
+        
+        System.out.println(id.alumnosDeXMateria(miMateria));
     }
     
 }
