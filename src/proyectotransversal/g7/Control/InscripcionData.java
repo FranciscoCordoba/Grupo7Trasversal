@@ -15,10 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Grupo3_LabI
- */
+
 public class InscripcionData {
     
      private Connection con = null;
@@ -144,7 +141,7 @@ public class InscripcionData {
         return alumnos;
     }
 
-public ArrayList<Materia> obtenerMateriaXAlumno(Alumno alumno){
+    public ArrayList<Materia> obtenerMateriaXAlumno(Alumno alumno){
     
     ArrayList<Materia> materias = new ArrayList();
     
@@ -215,6 +212,26 @@ public ArrayList<Materia> obtenerMateriaXAlumno(Alumno alumno){
         
         return materias;
     
+    }
+    
+    public boolean borrarInscripcionDeUnAlumno(int idAlumno, int idMateria){
+        boolean insc= false;
+        try {
+            String sql = "DELETE FROM inscripcion WHERE idAlumno=? and idMateria = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,idAlumno);
+            ps.setInt(2,idMateria);
+           
+             if (ps.executeUpdate() != 0) {
+		insc = true;
+	    }
+            ps.close();
+
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(null, "No se pudo borrar la inscripcion " + ex.getMessage());
+        }
+        return insc;
     }
     
 }
