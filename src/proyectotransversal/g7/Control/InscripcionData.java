@@ -143,6 +143,39 @@ public class InscripcionData {
 
         return alumnos;
     }
+
+public ArrayList<Materia> obtenerMateriaXAlumno(Alumno alumno){
+    
+    ArrayList<Materia> materias = new ArrayList();
+    
+        try {
+	    
+            String sql = "SELECT idMateria FROM inscripcion WHERE idAlumno = ?;";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, alumno.getIdAlumno());
+            
+            ResultSet resultSet = ps.executeQuery();
+            Materia materia;
+	    
+            while (resultSet.next()) {
+                if(alumno.isActivo()){
+                    materia = new Materia();
+                    materia = materiaData.obtenerMateriaPorID(resultSet.getInt("idMateria"));
+                    materias.add(materia);		    
+                }
+            }
+	    
+            ps.close();
+	    
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener las materias a través del alumno ingresado: " + ex.getMessage());
+        }
+
+        return materias;  
+    
+}
     
     public List<Materia> matNoInscriptas(int id){
         
