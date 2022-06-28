@@ -144,4 +144,44 @@ public class InscripcionData {
         return alumnos;
     }
     
+    public List<Materia> matNoInscriptas(int id){
+        
+        ArrayList <Materia> materias = new ArrayList<>();
+        
+        String sql = "SELECT * FROM materia WHERE idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno = ?)";
+        
+        try {
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            
+            ps.setInt(1, id);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            Materia materia;
+            
+            while (rs.next()) {  
+                
+                materia = new Materia();
+                
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAnio(rs.getInt("anio"));
+                materia.setActivo(rs.getBoolean("activo"));
+                
+                materias.add(materia);
+                
+            }
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+            
+            JOptionPane.showMessageDialog(null, "Error al mostrar materias " + ex);
+        }
+        
+        return materias;
+    
+    }
+    
 }
