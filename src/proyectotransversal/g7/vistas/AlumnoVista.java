@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package colegio.vistas;
+package proyectotransversal.g7.vistas;
 
 import proyectotransversal.g7.Modelo.Alumno;
 import java.util.HashSet;
@@ -13,16 +13,14 @@ import javax.swing.JOptionPane;
  *
  * @author brand
  */
-public class FormularioAlumno extends javax.swing.JInternalFrame {
-
-    private HashSet<Alumno> todosLosAlumnos;
+public class AlumnoVista extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form formularioAlumno
      */
-    public FormularioAlumno(HashSet<Alumno> todosLosAlumnos) {
+    public AlumnoVista() {
 	initComponents();
-	this.todosLosAlumnos = todosLosAlumnos;
+	
 
     }
 
@@ -157,13 +155,6 @@ public class FormularioAlumno extends javax.swing.JInternalFrame {
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
 	// TODO add your handling code here:
-	int leg = Integer.parseInt(jtLegajo.getText());
-	String nombre = jtNombre.getText();
-	String apellido = jtApellido.getText();
-
-	Alumno a = new Alumno(leg, nombre, apellido);
-	todosLosAlumnos.add(a);
-
 
     }//GEN-LAST:event_button1ActionPerformed
 

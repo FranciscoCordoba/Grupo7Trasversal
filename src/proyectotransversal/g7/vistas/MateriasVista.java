@@ -1,4 +1,4 @@
-package colegio.vistas;
+package proyectotransversal.g7.vistas;
 
 import proyectotransversal.g7.Modelo.Materia;
 import java.util.HashSet;
@@ -12,16 +12,15 @@ import java.util.HashSet;
  *
  * @author Pali
  */
-public class Formulario_materias extends javax.swing.JInternalFrame {
+public class MateriasVista extends javax.swing.JInternalFrame {
 
-    private HashSet<Materia> todasLasMaterias;
 
     /**
      * Creates new form Formulario_materias
      */
-    public Formulario_materias(HashSet<Materia> todasLasMaterias) {
+    public MateriasVista() {
 	initComponents();
-	this.todasLasMaterias = todasLasMaterias;
+
     }
 
     /**
@@ -78,6 +77,11 @@ public class Formulario_materias extends javax.swing.JInternalFrame {
         jButton3.setText("Nuevo");
 
         jButton4.setText("Salir");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -162,12 +166,12 @@ public class Formulario_materias extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 	// TODO add your handling code here:
-	int id = Integer.parseInt(jtID.getText());
-	String nombre = jtMateria.getText();
-	int anio = Integer.parseInt(jtAnio.getText());
-	Materia nm = new Materia(id, nombre, anio);
-	todasLasMaterias.add(nm);
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

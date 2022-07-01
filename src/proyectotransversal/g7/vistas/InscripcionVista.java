@@ -1,4 +1,4 @@
-package colegio.vistas;
+package proyectotransversal.g7.vistas;
 
 
 import proyectotransversal.g7.Modelo.Alumno;
@@ -15,18 +15,13 @@ import java.util.HashSet;
  *
  * @author mseba
  */
-public class Inscripcion extends javax.swing.JInternalFrame {
-private HashSet<Alumno> todosLosAlumnos=new HashSet<>();
-private HashSet<Materia> todasLasMaterias=new HashSet<>();
+public class InscripcionVista extends javax.swing.JInternalFrame {
+
     /**
      * Creates new form Inscripcion
      */
-    public Inscripcion(HashSet<Alumno> todosLosAlumnos,HashSet<Materia>todasLasMaterias) {
+    public InscripcionVista() {
         initComponents();
-        this.todosLosAlumnos=todosLosAlumnos;
-        this.todasLasMaterias=todasLasMaterias;
-        llenarComboAlumnos();
-        llenarComboMaterias();
     }
 
     /**
@@ -163,22 +158,7 @@ private HashSet<Materia> todasLasMaterias=new HashSet<>();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void llenarComboMaterias(){
-    
-        for(Materia m:todasLasMaterias){
-        
-            jcMaterias.addItem(m);
-        }
-        
-    }
-    
-    private void llenarComboAlumnos(){
-    
-        for(Alumno a:todosLosAlumnos){
-        
-            jcAlumnos.addItem(a);
-        }
-    }
+
     
     /**
      * @param args the command line arguments
