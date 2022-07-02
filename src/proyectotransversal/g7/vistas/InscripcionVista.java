@@ -39,20 +39,19 @@ public class InscripcionVista extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jcMaterias = new javax.swing.JComboBox<>();
         jcAlumnos = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btInscripcion = new javax.swing.JButton();
+        btSalir = new javax.swing.JButton();
 
+        setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
-        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
-
-        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
         jLabel1.setText("Formulario de Inscripcion");
 
-        jLabel2.setForeground(new java.awt.Color(0, 0, 255));
         jLabel2.setText("Elija una materia");
 
-        jLabel3.setForeground(new java.awt.Color(0, 0, 255));
         jLabel3.setText("Elija un alumno");
 
         jcMaterias.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 153, 255)));
@@ -64,21 +63,17 @@ public class InscripcionVista extends javax.swing.JInternalFrame {
 
         jcAlumnos.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 153, 255)));
 
-        jButton1.setBackground(new java.awt.Color(153, 204, 255));
-        jButton1.setForeground(new java.awt.Color(0, 0, 255));
-        jButton1.setText("Inscripcion");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btInscripcion.setText("Inscripcion");
+        btInscripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btInscripcionActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(153, 204, 255));
-        jButton2.setForeground(new java.awt.Color(0, 0, 255));
-        jButton2.setText("Salir");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btSalir.setText("Salir");
+        btSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btSalirActionPerformed(evt);
             }
         });
 
@@ -102,9 +97,9 @@ public class InscripcionVista extends javax.swing.JInternalFrame {
                             .addComponent(jcAlumnos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(143, 143, 143)
-                        .addComponent(jButton1)
+                        .addComponent(btInscripcion)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(71, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -121,8 +116,8 @@ public class InscripcionVista extends javax.swing.JInternalFrame {
                     .addComponent(jcAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btInscripcion)
+                    .addComponent(btSalir))
                 .addGap(41, 41, 41))
         );
 
@@ -144,19 +139,19 @@ public class InscripcionVista extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcMateriasActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalirActionPerformed
         // TODO add your handling code here:
         dispose();
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btSalirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInscripcionActionPerformed
         // TODO add your handling code here:
         Alumno alumnoSeleccionado=(Alumno)jcAlumnos.getSelectedItem();
         Materia materiaSeleccionada=(Materia)jcMaterias.getSelectedItem();
         alumnoSeleccionado.agregarMateria(materiaSeleccionada);
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btInscripcionActionPerformed
 
 
     
@@ -166,8 +161,8 @@ public class InscripcionVista extends javax.swing.JInternalFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btInscripcion;
+    private javax.swing.JButton btSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
