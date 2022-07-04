@@ -8,6 +8,7 @@ package proyectotransversal.g7.vistas;
 import proyectotransversal.g7.Modelo.Alumno;
 import proyectotransversal.g7.Modelo.Materia;
 import java.util.HashSet;
+import javax.swing.JOptionPane;
 
 /**
  *

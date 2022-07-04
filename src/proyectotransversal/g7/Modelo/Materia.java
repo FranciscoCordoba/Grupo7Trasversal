@@ -94,10 +94,4 @@ public class Materia {
         return "Materia{" + "idMateria=" + idMateria + ", nombre=" + nombre + ", anio=" + anio + ", activo=" + activo + '}';
     }
     
-    
-    
-    
-    
-    
-    
 }
