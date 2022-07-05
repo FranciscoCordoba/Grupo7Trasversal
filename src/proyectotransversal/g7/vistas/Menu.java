@@ -1,19 +1,21 @@
 package proyectotransversal.g7.vistas;
 
+<<<<<<< Updated upstream
 import proyectotransversal.g7.Modelo.Alumno;
 import proyectotransversal.g7.Modelo.Materia;
 import java.util.HashSet;
 import javax.swing.JOptionPane;
+=======
+>>>>>>> Stashed changes
 import proyectotransversal.g7.Control.Conexion;
 
-/**
- *
- * @author 54266
- */
 public class Menu extends javax.swing.JFrame {
 
+<<<<<<< Updated upstream
     private Conexion conexion;
     
+=======
+>>>>>>> Stashed changes
     public Menu() {
         conexion = new Conexion();
         initComponents();
@@ -49,6 +51,8 @@ public class Menu extends javax.swing.JFrame {
         jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        escritorio.setPreferredSize(new java.awt.Dimension(1250, 650));
 
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -142,11 +146,11 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
         );
 
         pack();
@@ -187,7 +191,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         escritorio.removeAll(); //"escritorio" es el nombre dado al DesktopPane
-        NotasVista nv = new NotasVista();
+        Conexion con = new Conexion();
+	NotasVista nv = new NotasVista();
         nv.setVisible(true);
         escritorio.add(nv);
         escritorio.repaint();
