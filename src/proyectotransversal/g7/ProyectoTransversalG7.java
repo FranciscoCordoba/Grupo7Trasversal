@@ -44,15 +44,12 @@ public class ProyectoTransversalG7 {
 	md.modificarMateria(miMateria);
 	
         //System.out.println(id.alumnosDeXMateria(miMateria));
-	
-	  
-	
+		
 	System.out.println(id.obtenerMateriaXAlumno(miAlumno));
         
         
         // Borrar inscripcion
-        //id.borrarInscripcionDeUnAlumno(1, 1);
-	
+        id.borrarInscripcionDeUnAlumno(1, 1);
 	
     }
     
