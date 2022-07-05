@@ -19,14 +19,12 @@ public class MateriaData {
 
     }
     
-    public boolean agregarMateria(Materia materia){
+    public boolean agregarMateria(Materia materia) throws SQLException{
 	
 	boolean insert = true;
 	
 	String sql = "INSERT INTO materia (nombre, anio, activo)  VALUES (?, ?, ?)";
-	
-	try{
-	
+		
 	    PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 	    ps.setString(1, materia.getNombre());
@@ -46,16 +44,7 @@ public class MateriaData {
 	    }
 	
 	    ps.close();
-	    
-	}catch(SQLException ex){
-	    insert = false;
-	    if (ex instanceof java.sql.SQLIntegrityConstraintViolationException) {
-		JOptionPane.showMessageDialog(null, "Ya existe una materia con ese nombre");
-	    } else {
-		JOptionPane.showMessageDialog(null, "Error de sintaxis" + ex);
-	    }
-	}
-	
+	    	
 	return insert;
 	
     }
