@@ -8,6 +8,7 @@ package proyectotransversal.g7.vistas;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import proyectotransversal.g7.Modelo.Alumno;
 import javax.swing.JOptionPane;
 import proyectotransversal.g7.Control.AlumnoData;
@@ -79,12 +80,6 @@ public class AlumnoVista extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel4.setText("Nombre");
 
-        jtLegajo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jtLegajoFocusLost(evt);
-            }
-        });
-
         btLimpiar.setText("Limpiar");
         btLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +95,7 @@ public class AlumnoVista extends javax.swing.JInternalFrame {
         });
 
         btActualizar.setText("Actualizar");
+        btActualizar.setEnabled(false);
         btActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btActualizarActionPerformed(evt);
@@ -107,6 +103,7 @@ public class AlumnoVista extends javax.swing.JInternalFrame {
         });
 
         btBorrar.setText("Borrar");
+        btBorrar.setEnabled(false);
         btBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btBorrarActionPerformed(evt);
@@ -114,6 +111,12 @@ public class AlumnoVista extends javax.swing.JInternalFrame {
         });
 
         jLabel5.setText("Dni");
+
+        jtDni.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtDniFocusLost(evt);
+            }
+        });
 
         jLabel6.setText("Activo");
 
@@ -215,26 +218,26 @@ public class AlumnoVista extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtLegajoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtLegajoFocusLost
-
-    }//GEN-LAST:event_jtLegajoFocusLost
-
     private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
+
+            
         String nombre = jtNombre.getText();
         String apellido = jtApellido.getText();
         Long dni = Long.parseLong(jtDni.getText());
         Boolean activo = cbActivo.isSelected();
-
+        
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
         String fecha = formatoFecha.format(jdChooser.getDate());
         LocalDate fechNac = LocalDate.parse(fecha, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-
+        
+            
         Alumno alumno = new Alumno(nombre, apellido, fechNac, dni, activo);
         if (alumnoData.agregarAlumno(alumno)) {
             JOptionPane.showMessageDialog(this, "Alumno Agregado con éxito");
             jtLegajo.setText(alumno.getIdAlumno() + "");
-            btGuardar.setEnabled(true);
-        }
+            btBorrar.setEnabled(true);
+        }       
+        limpiar(); 
 
     }//GEN-LAST:event_btGuardarActionPerformed
 
@@ -244,10 +247,11 @@ public class AlumnoVista extends javax.swing.JInternalFrame {
 
         if (alumnoData.borrarAlumno(id)) {
             JOptionPane.showMessageDialog(this, "Alumno Borrado correctamente");
+            limpiar();
         }
     }//GEN-LAST:event_btBorrarActionPerformed
 
-    private void btActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btActualizarActionPerformed
+    private void btActualizarActionPerformed(java.awt.event.ActionEvent evt) {                                             
 
 {//GEN-FIRST:event_jbtnActualizarActionPerformed
        int id=-1;
@@ -280,7 +284,7 @@ public class AlumnoVista extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Alumno modificado con éxito");
         }
     }//GEN-LAST:event_jbtnActualizarActionPerformed
-    }//GEN-LAST:event_btActualizarActionPerformed
+    }                                            
 
     private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
 
@@ -288,8 +292,11 @@ public class AlumnoVista extends javax.swing.JInternalFrame {
         jtNombre.setText("");
         jtApellido.setText("");
         jtDni.setText("");
-        jdChooser.setDate(new Date()); //arreglar ¡¡??
+        jdChooser.setDate(new Date());
         cbActivo.setEnabled(false);
+        btGuardar.setEnabled(true);
+        btBorrar.setEnabled(false);
+        btActualizar.setEnabled(false);
 
 
     }//GEN-LAST:event_btLimpiarActionPerformed
@@ -299,13 +306,16 @@ public class AlumnoVista extends javax.swing.JInternalFrame {
         try {
             Alumno alumno = alumnoData.obtenerAlumnoXId(Integer.parseInt(jtLegajo.getText()));
 
-            if (alumno != null) {
+            if (alumno != null) { 
 
                 jtNombre.setText(alumno.getNombre());
                 jtApellido.setText(alumno.getApellido());
                 jtDni.setText(alumno.getDni() + "");
                 jdChooser.setDate(java.sql.Date.valueOf(alumno.getFechNac()));
                 cbActivo.setSelected(alumno.isActivo());
+                btBorrar.setEnabled(true);
+                btActualizar.setEnabled(true);
+                btGuardar.setEnabled(false);
 
             }else{
                 
@@ -317,6 +327,21 @@ public class AlumnoVista extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Legajo invalido");
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jtDniFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtDniFocusLost
+        
+        try {
+            
+            Long.parseLong(jtDni.getText());
+            
+        } catch (Exception ex) {
+            
+            JOptionPane.showMessageDialog(this, "Debe ingresar un dni valido");
+            jtDni.requestFocus();
+        }
+        
+        
+    }//GEN-LAST:event_jtDniFocusLost
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btActualizar;
@@ -339,4 +364,14 @@ public class AlumnoVista extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtLegajo;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiar() {
+        this.jtApellido.setText("");
+        this.jtNombre.setText("");
+        this.jtDni.setText("");
+        this.jtLegajo.setText("");
+        jdChooser.setDate(new Date());
+        cbActivo.setEnabled(false);
+        
+   }
 }
