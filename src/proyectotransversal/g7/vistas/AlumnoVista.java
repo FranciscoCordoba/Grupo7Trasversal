@@ -267,7 +267,7 @@ public class AlumnoVista extends javax.swing.JInternalFrame {
         long dni=-1;
         try{
              dni=Long.parseLong(jtDni.getText());
-        }catch(Exception e){
+        }catch(Exception e){ 
         
              JOptionPane.showMessageDialog(this, "Usted debe ingresar un número");
              jtDni.requestFocus();

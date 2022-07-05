@@ -178,7 +178,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         escritorio.removeAll();
-        InscripcionVista ins = new InscripcionVista();
+        InscripcionVista ins = new InscripcionVista(conexion);
         ins.setVisible(true);
         escritorio.add(ins);
         escritorio.repaint();
