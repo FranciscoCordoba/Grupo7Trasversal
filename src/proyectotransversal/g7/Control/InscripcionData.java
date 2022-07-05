@@ -119,7 +119,6 @@ public class InscripcionData {
             String sql = "SELECT idAlumno FROM inscripcion WHERE idMateria = ?;";
             
             PreparedStatement ps = con.prepareStatement(sql);
-            
             ps.setInt(1, mat.getIdMateria());
             
             ResultSet resultSet = ps.executeQuery();

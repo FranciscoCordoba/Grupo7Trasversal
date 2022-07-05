@@ -2,29 +2,82 @@ package proyectotransversal.g7.vistas;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import proyectotransversal.g7.Control.Conexion;
+import proyectotransversal.g7.Control.InscripcionData;
 import proyectotransversal.g7.Control.MateriaData;
+import proyectotransversal.g7.Modelo.Alumno;
+import proyectotransversal.g7.Modelo.Inscripcion;
 import proyectotransversal.g7.Modelo.Materia;
 
 public class ConsultasVista extends javax.swing.JInternalFrame {
 
-    MateriaData materia;
-    ArrayList <Materia> materias;
-    Conexion conexion = null;
-    
+    private MateriaData materiaData;
+    private InscripcionData inscripcionData;
+    private ArrayList<Materia> materias;
+    private Conexion conexion;
+    private DefaultTableModel modelo;
+    private boolean iniciado = false;
+
     public ConsultasVista() {
-        conexion = new Conexion();
-        materia = new MateriaData(conexion);
-        materias = (ArrayList<Materia>)materia.obtenerMaterias();
-        cargarMaterias();
         initComponents();
+        conexion = new Conexion();
+        materiaData = new MateriaData(conexion);
+        materias = (ArrayList<Materia>)materiaData.obtenerMaterias();
+        cargarMaterias();
+        modelo = new DefaultTableModel();
+        inscripcionData = new InscripcionData(conexion);
+        cargarTabla();
+        refrescarTabla();
+        iniciado = true;
+    }
+
+    public void cargarMaterias() {
+        for (Materia mat : materias) {
+            jcbMaterias.addItem(mat);
+        }
     }
     
-    private void cargarMaterias(){
-        if(materias != null){
-            materias.forEach((mat) -> {
-                jcbMaterias.addItem(mat);
-            });
+    public void cargarTabla(){
+        
+        ArrayList<Object> columnas = new ArrayList<>();
+        columnas.add("Alumno");
+        columnas.add("ID");
+        columnas.add("DNI");
+        columnas.add("Nota");
+        
+        for(Object col : columnas){
+            modelo.addColumn(col);
+        }
+        
+        jtAlumnos.setModel(modelo);
+        
+    }
+    
+    public void refrescarTabla(){
+        Materia materia = (Materia)jcbMaterias.getSelectedItem();
+        
+        ArrayList<Alumno> lista = (ArrayList<Alumno>) inscripcionData.alumnosDeXMateria(materia);
+        
+        for(Alumno alu : lista){
+            for(Inscripcion ins : inscripcionData.obtenerInscripciones()){
+                
+            }
+        }
+        ArrayList<Inscripcion> notas = (ArrayList<Inscripcion>) inscripcionData.obtenerInscripciones();
+        
+        int i = 0;
+        
+        for(Alumno alu : lista){
+            modelo.addRow(new Object[]{alu.getApellido()+", "+alu.getNombre(), alu.getIdAlumno(), alu.getDni(), notas.get(i).getNota()});
+            i++;
+        }
+    }
+    
+    public void limpiarTabla(){
+        int a = modelo.getRowCount()-1;
+        for(int i = a; i >= 0; i--){
+            modelo.removeRow(i);
         }
     }
 
@@ -37,22 +90,21 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jcbMaterias = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jtAlumnos = new javax.swing.JTable();
+        btnSalir = new javax.swing.JButton();
+        jcbMaterias = new javax.swing.JComboBox<>();
 
         setClosable(true);
 
-        jcbMaterias.setToolTipText("");
-
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Consultas");
 
         jLabel2.setText("Materia");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -63,12 +115,18 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtAlumnos);
 
-        jButton1.setText("Salir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSalirActionPerformed(evt);
+            }
+        });
+
+        jcbMaterias.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbMateriasItemStateChanged(evt);
             }
         });
 
@@ -77,52 +135,59 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addContainerGap(68, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                    .addComponent(btnSalir)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(38, 38, 38)
                             .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jcbMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(56, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jcbMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(68, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(215, 215, 215))
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jcbMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addComponent(btnSalir)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void jcbMateriasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbMateriasItemStateChanged
+        if(iniciado){
+            limpiarTabla();
+            refrescarTabla();
+        }
+    }//GEN-LAST:event_jcbMateriasItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JComboBox<Materia> jcbMaterias;
+    private javax.swing.JTable jtAlumnos;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectotransversal.g7.vistas;
 
 import proyectotransversal.g7.Modelo.Alumno;
 import proyectotransversal.g7.Modelo.Materia;
 import java.util.HashSet;
 import javax.swing.JOptionPane;
+import proyectotransversal.g7.Control.Conexion;
 
 /**
  *
@@ -16,13 +12,10 @@ import javax.swing.JOptionPane;
  */
 public class Menu extends javax.swing.JFrame {
 
-    private HashSet<Alumno> todosLosAlumnos = new HashSet<>();
-    private HashSet<Materia> todasLasMaterias = new HashSet<>();
-
-    /**
-     * Creates new form Menu
-     */
+    private Conexion conexion;
+    
     public Menu() {
+        conexion = new Conexion();
         initComponents();
     }
 
@@ -78,7 +71,7 @@ public class Menu extends javax.swing.JFrame {
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
-                .addContainerGap(536, Short.MAX_VALUE)
+                .addContainerGap(383, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18))
         );
