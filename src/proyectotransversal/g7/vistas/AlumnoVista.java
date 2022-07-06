@@ -236,8 +236,9 @@ public class AlumnoVista extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Alumno Agregado con éxito");
             jtLegajo.setText(alumno.getIdAlumno() + "");
             btBorrar.setEnabled(true);
-        }       
-        limpiar(); 
+        }
+        
+        jtLegajo.setText(alumno.getIdAlumno() + "");
 
     }//GEN-LAST:event_btGuardarActionPerformed
 
