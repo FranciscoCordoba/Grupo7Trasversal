@@ -62,8 +62,9 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         
         for(Alumno alu : lista){
             for(int i = 0; i < notas.size(); i++){
-                if(notas.get(i).getAlumno().getIdAlumno() == alu.getIdAlumno()){
+                if(notas.get(i).getAlumno().getIdAlumno() == alu.getIdAlumno() && notas.get(i).getMateria().getIdMateria() == materia.getIdMateria()){
                     modelo.addRow(new Object[]{alu.getApellido()+", "+alu.getNombre(), alu.getIdAlumno(), alu.getDni(), notas.get(i).getNota()});
+                    break;
                 }
             }
         }
