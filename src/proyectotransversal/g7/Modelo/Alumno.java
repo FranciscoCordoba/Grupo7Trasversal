@@ -86,8 +86,10 @@ public class Alumno {
 
     @Override
     public String toString() {
-        return apellido + " " + nombre + " " + dni;
+        return "Alumno{" + "idAlumno=" + idAlumno + ", nombre=" + nombre + ", apellido=" + apellido + ", fechNac=" + fechNac + ", dni=" + dni + ", activo=" + activo + '}';
     }
+
+
 
     @Override
     public int hashCode() {

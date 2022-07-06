@@ -140,9 +140,12 @@ public class InscripcionData {
         return alumnos;
     }
 
-    public ArrayList<Materia> obtenerMateriaXAlumno(Alumno alumno){
+    public ArrayList <Materia> obtenerMateriaXAlumno(Alumno alumno){
+        
     
     ArrayList<Materia> materias = new ArrayList();
+    
+    
     
         try {
 	    
@@ -153,11 +156,13 @@ public class InscripcionData {
             ps.setInt(1, alumno.getIdAlumno());
             
             ResultSet resultSet = ps.executeQuery();
+            
+            
             Materia materia;
+            
 	    
             while (resultSet.next()) {
                 if(alumno.isActivo()){
-                    materia = new Materia();
                     materia = materiaData.obtenerMateriaPorID(resultSet.getInt("idMateria"));
                     materias.add(materia);		    
                 }
@@ -169,7 +174,7 @@ public class InscripcionData {
             JOptionPane.showMessageDialog(null, "Error al obtener las materias a través del alumno ingresado: " + ex.getMessage());
         }
 
-        return materias;  
+        return materias; 
     
 }
     
@@ -177,7 +182,7 @@ public class InscripcionData {
         
         ArrayList <Materia> materias = new ArrayList<>();
         
-        String sql = "SELECT * FROM materia WHERE idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno = ?)";
+        String sql = "SELECT * FROM materia WHERE activo = 1 and idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno = ?)";
         
         try {
             
@@ -233,4 +238,37 @@ public class InscripcionData {
         return insc;
     }
     
+    
+      public ArrayList<Materia> verMateriasInscriptas2(Alumno a) {
+    ArrayList<Materia> materias = new ArrayList();
+
+    try {
+      String sql = "SELECT * FROM cursada WHERE idAlumno = ? ;";
+
+      PreparedStatement ps = con.prepareStatement(sql);
+      ps.setInt(1, a.getIdAlumno());
+
+      ResultSet rs = ps.executeQuery();
+
+      if (!rs.next()) {
+        JOptionPane.showMessageDialog(null, a.getNombre() + " no está inscripto en ninguna materia.");
+      }
+      rs.previous();
+
+      Materia mat;
+
+      while (rs.next()) {
+        mat = materiaData.obtenerMateriaPorID(rs.getInt("idMateria"));
+
+        materias.add(mat);
+      }
+
+      ps.close();
+
+    } catch (SQLException e) {
+      JOptionPane.showMessageDialog(null, "Error al obtener las materias: " + e.getMessage());
+    }
+
+    return materias;
+  }
 }

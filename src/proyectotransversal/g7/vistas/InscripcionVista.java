@@ -8,6 +8,7 @@ package proyectotransversal.g7.vistas;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectotransversal.g7.Control.AlumnoData;
 import proyectotransversal.g7.Control.Conexion;
@@ -29,6 +30,7 @@ public class InscripcionVista extends javax.swing.JInternalFrame {
 
     public InscripcionVista(Conexion conexion) {
         initComponents();
+        cursadaData = new InscripcionData(conexion);
         alumnoData = new AlumnoData(conexion);
         listaAlumnos = (ArrayList<Alumno>) alumnoData.obtenerAlumnos();
         cargarAlumnos();
@@ -216,6 +218,8 @@ public class InscripcionVista extends javax.swing.JInternalFrame {
             borrarFilasTabla();
             
             
+        }else{
+            JOptionPane.showMessageDialog(this, "Error. Seleccione una materia");
         }
     }//GEN-LAST:event_btInscribirActionPerformed
 
@@ -288,8 +292,10 @@ public class InscripcionVista extends javax.swing.JInternalFrame {
         borrarFilasTabla();
 
         Alumno seleccionado = (Alumno) cbAlumnos.getSelectedItem();
-
-        ArrayList<Materia> lista = (ArrayList) cursadaData.obtenerMateriaXAlumno(seleccionado);
+        
+        
+        ArrayList <Materia> lista = cursadaData.obtenerMateriaXAlumno(seleccionado);
+        
 
         for (Materia materia : lista) {
             modelo.addRow(new Object[]{materia.getIdMateria(), materia.getNombre(), materia.getAnio()});
@@ -305,7 +311,6 @@ public class InscripcionVista extends javax.swing.JInternalFrame {
             for (int i = a; i >= 0; i--) {
                 modelo.removeRow(i);
             }
-
         }
     }
 

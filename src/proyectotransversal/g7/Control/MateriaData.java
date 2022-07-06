@@ -134,13 +134,13 @@ public class MateriaData {
     
     public Materia obtenerMateriaPorID(int id){
 
-        Materia materia = null;
+        Materia materia = materia = new Materia();
 
         try {
 
-        String sql = "SELECT * FROM materia WHERE idMateria = ? AND activo = 1;";
+        String sql = "SELECT * FROM materia WHERE idMateria = ?;";
 
-        PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement ps = con.prepareStatement(sql);
 
         ps.setInt(1, id);
 	
@@ -148,7 +148,7 @@ public class MateriaData {
 
         while(resultSet.next()){
 	
-	materia = new Materia();
+	
         materia.setNombre(resultSet.getString("nombre"));
         materia.setAnio(resultSet.getInt("anio"));
         materia.setIdMateria(resultSet.getInt("idMateria"));
