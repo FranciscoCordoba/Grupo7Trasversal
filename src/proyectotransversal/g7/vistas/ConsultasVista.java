@@ -58,19 +58,14 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         Materia materia = (Materia)jcbMaterias.getSelectedItem();
         
         ArrayList<Alumno> lista = (ArrayList<Alumno>) inscripcionData.alumnosDeXMateria(materia);
-        
-        for(Alumno alu : lista){
-            for(Inscripcion ins : inscripcionData.obtenerInscripciones()){
-                
-            }
-        }
         ArrayList<Inscripcion> notas = (ArrayList<Inscripcion>) inscripcionData.obtenerInscripciones();
         
-        int i = 0;
-        
         for(Alumno alu : lista){
-            modelo.addRow(new Object[]{alu.getApellido()+", "+alu.getNombre(), alu.getIdAlumno(), alu.getDni(), notas.get(i).getNota()});
-            i++;
+            for(int i = 0; i < notas.size(); i++){
+                if(notas.get(i).getAlumno().getIdAlumno() == alu.getIdAlumno()){
+                    modelo.addRow(new Object[]{alu.getApellido()+", "+alu.getNombre(), alu.getIdAlumno(), alu.getDni(), notas.get(i).getNota()});
+                }
+            }
         }
     }
     
@@ -135,7 +130,7 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(68, Short.MAX_VALUE)
+                .addContainerGap(60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnSalir)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,17 +139,15 @@ public class ConsultasVista extends javax.swing.JInternalFrame {
                             .addGap(38, 38, 38)
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcbMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jcbMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(150, 150, 150)))
                 .addContainerGap(68, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

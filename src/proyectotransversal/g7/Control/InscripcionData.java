@@ -142,10 +142,7 @@ public class InscripcionData {
 
     public ArrayList <Materia> obtenerMateriaXAlumno(Alumno alumno){
         
-    
     ArrayList<Materia> materias = new ArrayList();
-    
-    
     
         try {
 	    
@@ -175,7 +172,6 @@ public class InscripcionData {
         }
 
         return materias; 
-    
 }
     
     public List<Materia> matNoInscriptas(int id){
@@ -239,7 +235,7 @@ public class InscripcionData {
     }
     
     
-      public ArrayList<Materia> verMateriasInscriptas2(Alumno a) {
+    public ArrayList<Materia> verMateriasInscriptas2(Alumno a) {
     ArrayList<Materia> materias = new ArrayList();
 
     try {
