@@ -267,4 +267,30 @@ public class InscripcionData {
 
     return materias;
   }
+    
+    public List<Inscripcion> inscripcionesXAlumno(Alumno alumno) {
+        ArrayList<Inscripcion> listaAlumno = new ArrayList();
+        try {
+            String sql = "SELECT * FROM inscripcion where idAlumno=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, alumno.getIdAlumno());
+            ResultSet rs = ps.executeQuery();
+            Inscripcion inscripcion;
+            while (rs.next()) {
+                inscripcion = new Inscripcion();
+
+                Materia mat = materiaData.obtenerMateriaPorID(rs.getInt("idMateria"));
+                inscripcion.setMateria(mat);
+                inscripcion.setAlumno(alumno);
+                inscripcion.setId(rs.getInt("idInscripcion"));
+                inscripcion.setNota(rs.getDouble("nota"));
+
+                listaAlumno.add(inscripcion);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo obtener las inscripciones:" + ex);
+        }
+        return listaAlumno;
+    }
 }

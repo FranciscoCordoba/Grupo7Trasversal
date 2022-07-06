@@ -187,7 +187,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         escritorio.removeAll(); //"escritorio" es el nombre dado al DesktopPane
-        NotasVista nv = new NotasVista();
+        NotasVista nv = new NotasVista(conexion);
         nv.setVisible(true);
         escritorio.add(nv);
         escritorio.repaint();
